@@ -3,6 +3,7 @@
 # -----------------------------------------------------------------------------
 #
 # Open Report Parser - Open Source report parser
+# Copyright (C) 2026 Vincent Bentley
 # Copyright (C) 2023 John Bradley (userjack6880)
 # Copyright (C) 2016 TechSneeze.com
 # Copyright (C) 2012 John Bieling
@@ -11,7 +12,9 @@
 #   main script
 #
 # Available at: https://github.com/userjack6880/Open-Report-Parser
+#      Fork at: https://github.com/VincentBentley/Open-Report-Parser
 #
+# 14JUN26: Applied recommended fix for issue #36 - IPv6
 # -----------------------------------------------------------------------------
 #
 #  This file is part of Open Report Parser.
@@ -1646,7 +1649,7 @@ sub storeJSONInDatabase {
         $iptype = "ip";
       }
       elsif($nip = inet_pton(AF_INET6, $ip)) {
-        $ipval = $dbx{to_hex_string}{$nip};
+        $ipval = $dbx{to_hex_string}($nip); # 14JUN26 issue #36
         $iptype = "ip6";
       }
       else {
