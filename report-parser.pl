@@ -15,6 +15,7 @@
 #      Fork at: https://github.com/VincentBentley/Open-Report-Parser
 #
 # 14JUN26: Applied recommended fix for issue #36 - IPv6
+# 14JUN26: Fix missing percent values in Open-DMARC-Analyzer issue #112
 # -----------------------------------------------------------------------------
 #
 #  This file is part of Open Report Parser.
@@ -1005,7 +1006,7 @@ sub storeXMLInDatabase {
     $policy_aspf  = $xml->{'policy_published'}->{'aspf'};
     $policy_p     = $xml->{'policy_published'}->{'p'};
     $policy_sp    = $xml->{'policy_published'}->{'sp'};
-    $policy_pct   = $xml->{'policy_published'}->{'pct'};
+    $policy_pct   = $xml->{'policy_published'}->{'pct'} // 100; # 14JUN26 Fix missing percent values in Open-DMARC-Analyzer
   } 
   else {
     $domain       = $xml->{'policy_published'}[0]->{'domain'};
@@ -1013,7 +1014,7 @@ sub storeXMLInDatabase {
     $policy_aspf  = $xml->{'policy_published'}[0]->{'aspf'};
     $policy_p     = $xml->{'policy_published'}[0]->{'p'};
     $policy_sp    = $xml->{'policy_published'}[0]->{'sp'};
-    $policy_pct   = $xml->{'policy_published'}[0]->{'pct'};
+    $policy_pct   = $xml->{'policy_published'}[0]->{'pct'} // 100; # 14JUN26 Fix missing percent values in Open-DMARC-Analyzer
   }
 
   my $record = $xml->{'record'};
